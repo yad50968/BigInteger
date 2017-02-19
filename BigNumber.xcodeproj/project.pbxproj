@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6D68781D1E594CFB0081F957 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D68781C1E594CFB0081F957 /* main.cpp */; };
 		6D68783B1E5A0C1D0081F957 /* BigNumber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D6878391E5A0C1D0081F957 /* BigNumber.cpp */; };
+		6D68783E1E5A0EE40081F957 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 6D68783D1E5A0EE40081F957 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,7 @@
 		6D68781C1E594CFB0081F957 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6D6878391E5A0C1D0081F957 /* BigNumber.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BigNumber.cpp; sourceTree = "<group>"; };
 		6D68783A1E5A0C1D0081F957 /* BigNumber.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BigNumber.hpp; sourceTree = "<group>"; };
+		6D68783D1E5A0EE40081F957 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,7 @@
 		6D6878101E594CFB0081F957 = {
 			isa = PBXGroup;
 			children = (
+				6D68783D1E5A0EE40081F957 /* README.md */,
 				6D68781B1E594CFB0081F957 /* BigNumber */,
 				6D68781A1E594CFB0081F957 /* Products */,
 			);
@@ -124,6 +127,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D68783E1E5A0EE40081F957 /* README.md in Sources */,
 				6D68781D1E594CFB0081F957 /* main.cpp in Sources */,
 				6D68783B1E5A0C1D0081F957 /* BigNumber.cpp in Sources */,
 			);

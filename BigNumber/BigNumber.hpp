@@ -30,16 +30,16 @@ public:
     BigNumber absolute(); // convert to abs
     void operator = (BigNumber);
     bool operator == (BigNumber);
-    bool operator != (BigNumber);  // ok
-    bool operator > (BigNumber);  // ok
-    bool operator < (BigNumber);  // ok
-    bool operator >= (BigNumber); // ok
-    bool operator <= (BigNumber); // ok
-    BigNumber operator + (BigNumber); // ok
-    BigNumber operator - (BigNumber);  // ok
-    BigNumber operator * (BigNumber);
-    BigNumber operator / (BigNumber);
-    BigNumber operator % (BigNumber);
+    bool operator != (BigNumber);
+    bool operator > (BigNumber);
+    bool operator < (BigNumber);
+    bool operator >= (BigNumber);
+    bool operator <= (BigNumber);
+    BigNumber operator + (BigNumber);
+    BigNumber operator - (BigNumber);
+   // BigNumber operator * (BigNumber);
+   // BigNumber operator / (BigNumber);
+   // BigNumber operator % (BigNumber);
     operator string(); // for conversion from BigNumber to string
     
 private:
