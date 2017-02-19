@@ -52,7 +52,7 @@ const string BigNumber::getString() {
     return signedString;
 }
 
-BigNumber BigNumber::getabsolute(BigNumber input) {
+BigNumber BigNumber::getAbsolute(BigNumber input) {
     BigNumber result;
     result.setSign(false);
     result.setNumber(input.getNumber());
@@ -109,10 +109,10 @@ BigNumber BigNumber::operator+(BigNumber input) {
         result.setNumber(add(getNumber(), input.getNumber()));
         
     } else {
-        if( getabsolute(*this) > getabsolute(input) ) {
+        if( getAbsolute(*this) > getAbsolute(input) ) {
             result.setNumber( sub(getNumber(), input.getNumber() ) );
             result.setSign( getSign() );
-        } else if( getabsolute(*this) < getabsolute(input) ){
+        } else if( getAbsolute(*this) < getAbsolute(input) ){
             result.setNumber( sub(input.getNumber(), getNumber() ) );
             result.setSign( input.getSign() );
         } else {
