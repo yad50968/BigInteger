@@ -52,11 +52,18 @@ const string BigNumber::getString() {
     return signedString;
 }
 
-// convert to abs
-BigNumber BigNumber::absolute() {
+BigNumber BigNumber::getabsolute(BigNumber input) {
+    BigNumber result;
+    result.setSign(false);
+    result.setNumber(input.getNumber());
     
-    setSign( !getSign() );
-    return *this;
+    return result;
+}
+
+
+// convert to abs
+void BigNumber::absolute() {
+    setSign(false);
 }
 
 void BigNumber::operator = (BigNumber input) {
@@ -65,98 +72,54 @@ void BigNumber::operator = (BigNumber input) {
 }
 
 bool BigNumber::operator == (BigNumber input) {
-    return getNumber() == input.getNumber() && getSign() == input.getSign();
+    return equals((*this) , input);
 }
 
 bool BigNumber::operator != (BigNumber input) {
-    return (getNumber() != input.getNumber()) || (getSign() != input.getSign());
+    return ! equals((*this) , input);
 }
 bool BigNumber::operator > (BigNumber input) {
     
-    bool sign1 {getSign()},
-    sign2 {input.getSign()};
-    
-    if(sign1 && !sign2) return true;
-    else if(!sign1 && sign2) return false;
-    else if(sign1 && sign2) return getNumber() > input.getNumber();
-    else return getNumber() < input.getNumber();
+    return greater((*this) , input);
 }
 
 
 bool BigNumber::operator < (BigNumber input) {
     
-    bool sign1 {getSign()},
-    sign2 {input.getSign()};
-    
-    if(!sign1 && sign2) return true;
-    else if(sign1 && !sign2) return false;
-    else if(sign1 && sign2) return getNumber() < input.getNumber();
-    else return getNumber() > input.getNumber();
+    return less((*this) , input);
     
 }
 bool BigNumber::operator >= (BigNumber input) {
     
-    bool sign1 {getSign()},
-    sign2 {input.getSign()};
-    
-    if(sign1 && !sign2) return true;
-    else if(!sign1 && sign2) return false;
-    else if(sign1 && sign2) return getNumber() >= input.getNumber();
-    else return getNumber() <= input.getNumber();
+    return equals((*this) , input) || greater((*this), input);
 }
 
 bool BigNumber::operator <= (BigNumber input) {
     
-    bool sign1 {getSign()},
-    sign2 {input.getSign()};
-    
-    if(!sign1 && sign2) return true;
-    else if(sign1 && !sign2) return false;
-    else if(sign1 && sign2) return getNumber() <= input.getNumber();
-    else return getNumber() >= input.getNumber();
+    return equals((*this) , input) || less((*this), input);
 }
 
 BigNumber BigNumber::operator+(BigNumber input) {
     
     BigNumber result;
     
-    if(getSign() && input.getSign()) {
+    if(getSign() == input.getSign()) {
         
-        result.setSign(false);
+        result.setSign(getSign());
         result.setNumber(add(getNumber(), input.getNumber()));
-        
-    } else if(getSign() && !input.getSign()) {
-        
-        if(getNumber() > input.getNumber()) {
-            result.setSign(false);
-            result.setNumber(sub(getNumber(), input.getNumber()));
-        } else if (getNumber() < input.getNumber()) {
-            result.setSign(true);
-            result.setNumber(sub(input.getNumber(), getNumber()));
-        } else {
-            result.setSign(false);
-            result.setNumber("0");
-        }
-        
-        
-    } else if(!getSign() && input.getSign()) {
-        
-        if(getNumber() > input.getNumber()) {
-            result.setSign(true);
-            result.setNumber(sub(getNumber(), input.getNumber()));
-        } else if(getNumber() < input.getNumber()) {
-            result.setSign(false);
-            result.setNumber(sub(input.getNumber(), getNumber()));
-        } else {
-            result.setSign(false);
-            result.setNumber("0");
-        }
         
     } else {
-        
-        result.setSign(true);
-        result.setNumber(add(getNumber(), input.getNumber()));
-        
+        if( getabsolute(*this) > getabsolute(input) ) {
+            result.setNumber( sub(getNumber(), input.getNumber() ) );
+            result.setSign( getSign() );
+        } else if( getabsolute(*this) < getabsolute(input) ){
+            result.setNumber( sub(input.getNumber(), getNumber() ) );
+            result.setSign( input.getSign() );
+        } else {
+            result.setNumber("0");
+            result.setSign(false);
+
+        }
     }
     
     return result;
@@ -189,7 +152,8 @@ bool BigNumber::checkString(const string& str) {
 
 string BigNumber::add(string n1, string n2) {
     string result = (n1.length() > n2.length()) ?  n1 : n2;
-    char carry = '0';
+    
+    int carry = 0;
     int differenceInLength = abs( (int) (n1.size() - n2.size()) );
     
     if(n1.size() > n2.size())
@@ -199,19 +163,16 @@ string BigNumber::add(string n1, string n2) {
         n1.insert(0, differenceInLength, '0');
     
     for(long i = n1.size() - 1; i >= 0; --i) {
-        result[i] = ( (carry - '0') + (n1[i] - '0') + (n2[i] - '0') ) + '0';
         
-        if(i != 0) {
-            if(result[i] > '9') {
-                result[i] -= 10;
-                carry = '1';
-            } else
-                carry = '0';
-        }
+        int tmp = carry + (n1[i] - '0') + (n2[i] - '0');
+        
+        carry = tmp / 10;
+        result[i] = tmp % 10 + '0';
+        
     }
-    if(result[0] > '9') {
-        result[0]-= 10;
-        result.insert(0,1,'1');
+    if(carry) {
+        result = "1" + result;
+       
     }
     return result;
 }
@@ -219,12 +180,14 @@ string BigNumber::add(string n1, string n2) {
 
 string BigNumber::sub(string n1, string n2) {
     
-    // always n1.size >= n2.size
+    string result = (n1.length() > n2.length()) ?  n1 : n2;
     
-    string result = n1;
     int differenceInLength = abs( (int)(n1.size() - n2.size()) );
+    if(n1.size() > n2.size())
+        n2.insert(0, differenceInLength, '0'); // put zeros from left
+    else
+        n1.insert(0, differenceInLength, '0');
     
-    n2.insert(0, differenceInLength, '0');
     
     for(long i = n1.length() - 1; i >= 0; --i) {
         if(n1[i] < n2[i]) {
@@ -239,4 +202,38 @@ string BigNumber::sub(string n1, string n2) {
         result.erase(0,1);
     
     return result;
+}
+
+
+bool BigNumber::equals(BigNumber n1, BigNumber n2) {
+    return n1.getNumber() == n2.getNumber() && n1.getSign() == n2.getSign();
+}
+
+bool BigNumber::less(BigNumber n1, BigNumber n2) {
+    bool sign1 = n1.getSign();
+    bool sign2 = n2.getSign();
+    
+    if(sign1 && ! sign2) // if n1 is -ve and n2 is +ve
+        return true;
+    
+    else if(! sign1 && sign2)
+        return false;
+    
+    else if(! sign1) { // both +ve
+        if(n1.getNumber().length() < n2.getNumber().length() )
+            return true;
+        if(n1.getNumber().length() > n2.getNumber().length() )
+            return false;
+        return n1.getNumber() < n2.getNumber();
+    } else { // both -ve
+        if(n1.getNumber().length() > n2.getNumber().length())
+            return true;
+        if(n1.getNumber().length() < n2.getNumber().length())
+            return false;
+        return n1.getNumber().compare( n2.getNumber() ) > 0; // greater with -ve sign is LESS
+    }
+}
+
+bool BigNumber::greater(BigNumber n1, BigNumber n2) {
+    return ! equals(n1, n2) && ! less(n1, n2);
 }

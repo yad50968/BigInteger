@@ -18,89 +18,33 @@ using namespace std;
 
 int main() {
     
-    
-    BigNumber no {"---"};
-    cout << no.getSign() << endl;
-    cout << no.getNumber() << endl;
-    
-    cout << endl;
-    
-    /*---------------------------------------*/
-    
-    
-    BigNumber zero {"0"};
-    zero.setSign("true");
-    zero.setNumber("10000");
-    cout << zero.getSign() << endl;
-    cout << zero.getNumber() << endl;
-    
-    cout << endl;
-    
-    /*---------------------------------------*/
-    
-    
-    zero.absolute();
-    cout << zero.getSign() << endl;
-    cout << zero.getNumber() << endl;
-    
-    cout << endl;
-    
-    
-    /*---------------------------------------*/
-    
-    
-    BigNumber equalval {};
-    
-    equalval = BigNumber {"99999"};
-    
-    cout << equalval.getSign() << endl;
-    cout << equalval.getNumber() << endl;
-    
-    cout << endl;
-    
-    /*---------------------------------------*/
-    
-    
-    BigNumber equalvaltwo {};
-    equalvaltwo = BigNumber {"99999"};
-    
-    cout << (equalval == equalvaltwo) << endl;
-    cout << (equalval != equalvaltwo) << endl;
-
-    equalvaltwo.setSign("true");
-    cout << (equalval == equalvaltwo) << endl;
-    cout << (equalval != equalvaltwo) << endl;
-    cout << endl;
-    
-    /*---------------------------------------*/
-    
-    
-    BigNumber a {"111112222233333444445555566666777778888899999"};
-    cout << a.getSign() << endl;
-    cout << a.getNumber() << endl;
-    
-    cout << endl;
-    
-    /*---------------------------------------*/
-    
-    BigNumber b {"-111112222233333444445555566666777778888899999"};
-    cout << b.getSign() << endl;
-    cout << b.getNumber() << endl;
-
-    cout << endl;
-    
-    /*---------------------------------------*/
-    
+    BigNumber a {"-1111999"};
+    BigNumber b {"1999"};
     BigNumber c = a + b;
+    BigNumber d = a - b;
+    cout << string(c) << " " << string(d) << endl;
     
-    cout << c.getSign() << endl;
-    cout << c.getNumber() << endl;
+    BigNumber a1 {"-1111"};
+    BigNumber b1 {"2222"};
+    BigNumber c1 = a1 + b1;
     
-    cout << endl;
+    BigNumber d1 = a1 - b1;
+    cout << string(c1) << " " << string(d1) << endl;
     
-    /*---------------------------------------*/
-    cout << string(c);
     
-    cout << endl;
+    BigNumber a2 {"1111"};
+    BigNumber b2 {"-2222"};
+    BigNumber c2 = a2 + b2;
+    
+    BigNumber d2 = a2 - b2;
+    cout << string(c2) << " " << string(d2) << endl;
+    
+    
+    BigNumber a3 {"-1111"};
+    BigNumber b3 {"-2222"};
+    BigNumber c3 = a3 + b3;
+    
+    BigNumber d3 = a3 - b3;
+    cout << string(c3) << " " << string(d3) << endl;
     
 }

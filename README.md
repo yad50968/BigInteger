@@ -55,6 +55,11 @@ An Implementation of BigNumber library in C++
     BigNumber d = {"-33333"};
     d.absolute();
     string(d); // 33333
+
+    BigNumber e = {"-100"};
+    BigNumber k = e.getabsoulte();
+    string(k); // "100"
+    string(e); // "-100"
 ```
 
 
