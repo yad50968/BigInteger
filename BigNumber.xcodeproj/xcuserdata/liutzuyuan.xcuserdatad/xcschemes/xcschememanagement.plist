@@ -9,10 +9,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>TestBigNumber.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>6D6878181E594CFB0081F957</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6D6878261E59F8320081F957</key>
 		<dict>
 			<key>primary</key>
 			<true/>
