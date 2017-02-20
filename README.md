@@ -5,11 +5,13 @@ An Implementation of BigNumber library in C++ <br>
 Develop with Xcode
 
 ### Usage
+
+#### Include
 ```C++ 
 #include "BigNumber.hpp" 
 ```
 
-### Init
+#### Init
 ```C++
 
     BigNumber a {};
