@@ -18,6 +18,11 @@ using namespace std;
 
 int main() {
     
+    BigNumber x {"999"};
+    BigNumber y {"1"};
+
+    cout << string(x * y);
+    
     BigNumber a {"-1111999"};
     BigNumber b {"1999"};
     BigNumber c = a + b;

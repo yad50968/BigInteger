@@ -38,11 +38,12 @@ public:
     bool operator <= (BigNumber);
     BigNumber operator + (BigNumber);
     BigNumber operator - (BigNumber);
-    // BigNumber operator * (BigNumber);
+    BigNumber operator * (BigNumber);
     // BigNumber operator / (BigNumber);
     // BigNumber operator % (BigNumber);
     BigNumber& operator += (BigNumber b);
     BigNumber& operator -= (BigNumber b);
+    BigNumber& operator *= (BigNumber b);
     operator string(); // for conversion from BigNumber to string
     
 private:

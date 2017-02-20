@@ -62,8 +62,17 @@ Develop with Xcode
     
     BigNumber c = a - b; // "11111"
 
-    BigNumber d -= c;
+    a -= b; // "11111"
 ```
+
+### Mul
+```C++
+    BigNumber a {"100"};
+    BigNumber b {"100"};
+
+    BigNumber c = a * b; // "10000"
+    a *= b; // "10000"
+    
 #### Abs
 ```C++
     BigNumber d = {"-33333"};

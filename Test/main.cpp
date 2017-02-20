@@ -170,10 +170,60 @@ TEST_CASE("Testing SUB") {
     }
 }
 
+TEST_CASE("Testing Mul") {
+    SECTION("Test 1") {
+        BigNumber a {"100"};
+        BigNumber b {"100"};
+        
+        REQUIRE(string(a * b) == "10000");
+    }
+    
+    
+    SECTION("Test 2") {
+        BigNumber a {"100"};
+        BigNumber b {"-100"};
+        
+        REQUIRE(string(a * b) == "-10000");
+    }
+    
+    
+    
+    SECTION("Test 3") {
+        BigNumber a {"-100"};
+        BigNumber b {"100"};
+        
+        REQUIRE(string(a * b) == "-10000");
+    }
+    
+    
+    
+    SECTION("Test 4") {
+        BigNumber a {"-100"};
+        BigNumber b {"-100"};
+        
+        REQUIRE(string(a * b) == "10000");
+    }
+    
+    SECTION("Test 5") {
+        BigNumber a {"0"};
+        BigNumber b {"100"};
+        
+        REQUIRE(string(a * b) == "0");
+    }
+    
+    SECTION("Test 5") {
+        BigNumber a {"0"};
+        BigNumber b {"100"};
+        
+        a *= b;
+        REQUIRE(string(a) == "0");
+    }
+}
+
 TEST_CASE("Testing Abs") {
     
     SECTION("Test 1") {
-        BigNumber d = {"-33333"};
+        BigNumber d {"-33333"};
         d.absolute();
         
         REQUIRE(string(d) == "33333");
@@ -223,7 +273,5 @@ TEST_CASE("Test Comparison") {
         REQUIRE( (a >= b) == true);
         
     }
-    
-    
     
 }

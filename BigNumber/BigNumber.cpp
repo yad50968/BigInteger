@@ -52,6 +52,8 @@ const string BigNumber::getString() {
     return signedString;
 }
 
+
+
 BigNumber BigNumber::getAbsolute() {
     BigNumber result;
     result.setSign(false);
@@ -134,6 +136,20 @@ BigNumber BigNumber::operator-(BigNumber input) {
     return (*this) + tmp;
     
 }
+
+BigNumber BigNumber::operator * (BigNumber input) {
+    BigNumber result;
+    
+    result.setNumber(mul(getNumber(), input.getNumber()));
+    result.setSign( getSign() != input.getSign() );
+    
+    if(result.getNumber() == "0") // avoid (-0) problem
+        result.setSign(false);
+    
+    return result;
+}
+
+
 BigNumber& BigNumber::operator += (BigNumber input) {
     (*this) = (*this) + input;
     return (*this);
@@ -141,6 +157,11 @@ BigNumber& BigNumber::operator += (BigNumber input) {
 
 BigNumber& BigNumber::operator -= (BigNumber input) {
     (*this) = (*this) - input;
+    return (*this);
+}
+
+BigNumber& BigNumber::operator *= (BigNumber input) {
+    (*this) = (*this) * input;
     return (*this);
 }
 BigNumber::operator string() {
@@ -207,6 +228,40 @@ string BigNumber::sub(string n1, string n2) {
     
     while(result[0] == '0' && result.length() != 1)
         // erase leading zeros
+        result.erase(0,1);
+    
+    return result;
+}
+
+string BigNumber::mul(string n1, string n2) {
+    
+    if(n1.length() > n2.length())
+        n1.swap(n2);
+    
+    string result = "0";
+    for(long i = n1.length() - 1; i >= 0; --i) {
+        string temp = n2;
+        int currentDigit = n1[i] - '0';
+        int carry = 0;
+        
+        for(long j = temp.length() - 1; j >= 0; --j) {
+            temp[j] = ((temp[j] - '0') * currentDigit) + carry;
+            
+            carry = temp[j] / 10;
+            temp[j] %= 10;
+            temp[j] += '0';
+            
+        }
+        
+        if(carry > 0)
+            temp.insert(0, 1, (carry + '0'));
+        
+        temp.append((n1.length() - i - 1), '0'); // as like mult by 10, 100, 1000, 10000 and so on
+        
+        result = add(result, temp); // O(n)
+    }
+    
+    while(result[0] == '0' && result.length() != 1) // erase leading zeros
         result.erase(0,1);
     
     return result;
