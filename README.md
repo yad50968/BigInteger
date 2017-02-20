@@ -86,6 +86,12 @@ Develop with Xcode
 1. More operator
 2. Error Handler
 
+### Test
+Use catch <br>
+```
+http://hiltmon.com/blog/2014/10/26/simple-c-plus-plus-testing-with-catch-in-xcode/
+https://github.com/philsquared/Catch
+```
 
 ### Reference
 ``` https://github.com/panks/BigInteger ```
