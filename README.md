@@ -18,7 +18,7 @@ Develop with Xcode
 
 ```
 
-### Access
+#### Access
 ```C++
 
     BigNumber a {"-12345"};
@@ -33,17 +33,17 @@ Develop with Xcode
     string(b); // "999"
 ```
 
-### Operators
+#### Operators
 
 
-#### Equal
+##### Equal
 ```C++
     BigNumber a {"11111"};
     BigNumber b = a;
     string(b); // "11111"
 
 ```
-#### Add
+##### Add
 ```C++
     BigNumber a {"11111"};
     BigNumber b {"22222"};
@@ -55,7 +55,7 @@ Develop with Xcode
     BigNumber k += e; 
 
 ```
-#### Sub
+##### Sub
 ```C++
     BigNumber a {"22222"};
     BigNumber b {"11111"};
@@ -65,15 +65,16 @@ Develop with Xcode
     a -= b; // "11111"
 ```
 
-### Mul
+##### Mul
 ```C++
     BigNumber a {"100"};
     BigNumber b {"100"};
 
     BigNumber c = a * b; // "10000"
     a *= b; // "10000"
-    
-#### Abs
+```
+
+##### Abs
 ```C++
     BigNumber d = {"-33333"};
     d.absolute();
@@ -86,7 +87,7 @@ Develop with Xcode
 ```
 
 
-### Comparison
+##### Comparison
 ```C++
     BigNumber a {"11111"};
     BigNumber b {"22222"};
