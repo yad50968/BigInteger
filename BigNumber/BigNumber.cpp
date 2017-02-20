@@ -134,7 +134,15 @@ BigNumber BigNumber::operator-(BigNumber input) {
     return (*this) + tmp;
     
 }
+BigNumber& BigNumber::operator += (BigNumber input) {
+    (*this) = (*this) + input;
+    return (*this);
+}
 
+BigNumber& BigNumber::operator -= (BigNumber input) {
+    (*this) = (*this) - input;
+    return (*this);
+}
 BigNumber::operator string() {
     string signedString = getSign() ? "-" : "";
     signedString += getNumber();

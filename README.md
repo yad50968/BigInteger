@@ -1,7 +1,8 @@
 # BigInteger
 
 ### Description
-An Implementation of BigNumber library in C++
+An Implementation of BigNumber library in C++ <br>
+Develop with Xcode
 
 ### Usage
 ```C++ 
@@ -42,6 +43,8 @@ An Implementation of BigNumber library in C++
     BigNumber d = {"-33333"}
     BigNumber e = c + d; // "0"
 
+    BigNumber k += e; 
+
 ```
 #### Sub
 ```C++
@@ -49,6 +52,8 @@ An Implementation of BigNumber library in C++
     BigNumber b {"11111"};
     
     BigNumber c = a - b; // "11111"
+
+    BigNumber d -= c;
 ```
 #### Abs
 ```C++
