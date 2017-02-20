@@ -34,6 +34,15 @@ Develop with Xcode
 ```
 
 ### Operators
+
+
+#### Equal
+```C++
+    BigNumber a {"11111"};
+    BigNumber b {a};
+    string(b); // "11111"
+
+```
 #### Add
 ```C++
     BigNumber a {"11111"};
@@ -62,7 +71,7 @@ Develop with Xcode
     string(d); // 33333
 
     BigNumber e = {"-100"};
-    BigNumber k = getAbsolute();
+    BigNumber k = e.getAbsolute();
     string(k); // "100"
     string(e); // "-100"
 ```

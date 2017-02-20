@@ -27,7 +27,7 @@ public:
     void setSign(bool);
     const bool& getSign();
     const string getString();
-    BigNumber getAbsolute(BigNumber);
+    BigNumber getAbsolute();
     void absolute(); // convert to abs
     void operator = (BigNumber);
     bool operator == (BigNumber);

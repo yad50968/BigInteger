@@ -59,6 +59,15 @@ TEST_CASE("Testing ACCESS") {
     }
 }
 
+TEST_CASE("Testing Equal") {
+    
+    SECTION("Test 1") {
+        BigNumber a {"-1000"};
+        BigNumber b {a};
+        
+        REQUIRE(string(b) == "-1000");
+    }
+}
 TEST_CASE("Testing ADD") {
     
     SECTION("Test 1") {
@@ -159,4 +168,62 @@ TEST_CASE("Testing SUB") {
         
         REQUIRE(string(a) == "-1");
     }
+}
+
+TEST_CASE("Testing Abs") {
+    
+    SECTION("Test 1") {
+        BigNumber d = {"-33333"};
+        d.absolute();
+        
+        REQUIRE(string(d) == "33333");
+    }
+    
+    SECTION("Test 2") {
+        
+        BigNumber e = {"-100"};
+        BigNumber k = e.getAbsolute();
+        REQUIRE(string(e) == "-100");
+        REQUIRE(string(k) == "100");
+    }
+}
+
+TEST_CASE("Test Comparison") {
+    
+    BigNumber a {"100"};
+    BigNumber b {"-100"};
+    
+    SECTION("Test 1") {
+        
+        REQUIRE( (a == b) == false);
+    }
+    
+    SECTION("Test 2") {
+        
+        REQUIRE( (a != b) == true);
+    }
+    
+    SECTION("Test 3") {
+        
+        REQUIRE( (a < b) == false);
+    }
+    
+    SECTION("Test 4") {
+        
+        REQUIRE( (a <= b) == false);
+    }
+    
+    SECTION("Test 5") {
+        
+        REQUIRE( (a > b) == true);
+    }
+    
+    SECTION("Test 6") {
+        
+        REQUIRE( (a >= b) == true);
+        
+    }
+    
+    
+    
 }
