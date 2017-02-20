@@ -87,7 +87,7 @@ Develop with Xcode
 2. Error Handler
 
 ### Test
-Use catch <br>
+Use Catch <br>
 ```
 http://hiltmon.com/blog/2014/10/26/simple-c-plus-plus-testing-with-catch-in-xcode/
 https://github.com/philsquared/Catch
