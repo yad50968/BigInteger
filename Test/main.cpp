@@ -63,7 +63,7 @@ TEST_CASE("Testing Equal") {
     
     SECTION("Test 1") {
         BigNumber a {"-1000"};
-        BigNumber b {a};
+        BigNumber b = a;
         
         REQUIRE(string(b) == "-1000");
     }

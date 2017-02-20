@@ -39,7 +39,7 @@ Develop with Xcode
 #### Equal
 ```C++
     BigNumber a {"11111"};
-    BigNumber b {a};
+    BigNumber b = a;
     string(b); // "11111"
 
 ```
