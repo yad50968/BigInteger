@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <regex>
 
 using namespace std;
@@ -39,11 +40,13 @@ public:
     BigNumber operator + (BigNumber);
     BigNumber operator - (BigNumber);
     BigNumber operator * (BigNumber);
-    // BigNumber operator / (BigNumber);
-    // BigNumber operator % (BigNumber);
-    BigNumber& operator += (BigNumber b);
-    BigNumber& operator -= (BigNumber b);
-    BigNumber& operator *= (BigNumber b);
+    BigNumber operator / (BigNumber);
+    BigNumber operator % (BigNumber);
+    BigNumber& operator += (BigNumber);
+    BigNumber& operator -= (BigNumber);
+    BigNumber& operator *= (BigNumber);
+    BigNumber& operator /= (BigNumber);
+    BigNumber& operator %= (BigNumber);
     operator string(); // for conversion from BigNumber to string
     
 private:
@@ -53,10 +56,12 @@ private:
     string add(string, string);
     string sub(string, string);
     string mul(string, string);
-    bool equals(BigNumber n1, BigNumber n2);
-    bool less(BigNumber n1, BigNumber n2);
-    bool greater(BigNumber n1, BigNumber n2);
-    
+    pair<string, long long int> div(string, long long int);
+    bool equals(BigNumber, BigNumber);
+    bool less(BigNumber, BigNumber);
+    bool greater(BigNumber, BigNumber);
+    long long toInt(string);
+    string toString(long long int);
     
 };
 

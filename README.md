@@ -76,6 +76,31 @@ Develop with Xcode
     a *= b; // "10000"
 ```
 
+##### Div
+```C++
+    CAN DIV NUMBER LARGE THAN "long long int"
+    
+    BigNumber a {"1000"};
+    BigNumber b {"100"};
+
+    BigNumber c = a / b; // "10"
+    a /= b; // "10"
+
+```
+
+##### Mod
+```C++
+
+    CAN MOD NUMBER LARGE THAN "long long int"
+
+    BigNumber a {"12"};
+    BigNumber b {"5"};
+
+    BigNumber c = a % b; // "2"
+    a %= b; // "2"
+```
+
+
 ##### Abs
 ```C++
     BigNumber d = {"-33333"};

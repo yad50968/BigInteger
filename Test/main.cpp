@@ -220,6 +220,68 @@ TEST_CASE("Testing Mul") {
     }
 }
 
+
+TEST_CASE("Testing Div") {
+    SECTION("Test 1") {
+        BigNumber a {"1000"};
+        BigNumber b {"100"};
+        
+        REQUIRE(string(a / b) == "10");
+    }
+    
+    
+    SECTION("Test 2") {
+        BigNumber a {"1000"};
+        BigNumber b {"-100"};
+        
+        REQUIRE(string(a / b) == "-10");
+    }
+    
+    
+    
+    SECTION("Test 3") {
+        BigNumber a {"-100"};
+        BigNumber b {"100"};
+        
+        REQUIRE(string(a / b) == "-1");
+    }
+    
+    
+    
+    SECTION("Test 4") {
+        BigNumber a {"-100"};
+        BigNumber b {"-100"};
+        
+        REQUIRE(string(a / b) == "1");
+    }
+    
+    SECTION("Test 5") {
+        BigNumber a {"0"};
+        BigNumber b {"100"};
+        
+        REQUIRE(string(a / b) == "0");
+    }
+    
+    SECTION("Test 5") {
+        BigNumber a {"110"};
+        BigNumber b {"100"};
+        
+        a /= b;
+        REQUIRE(string(a) == "1");
+    }
+}
+
+TEST_CASE("Testing Mod") {
+    SECTION("Test 1") {
+        BigNumber a {"12"};
+        BigNumber b {"5"};
+        
+        REQUIRE(string(a % b) == "2");
+    }
+    
+    
+}
+
 TEST_CASE("Testing Abs") {
     
     SECTION("Test 1") {

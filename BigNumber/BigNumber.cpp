@@ -101,7 +101,7 @@ bool BigNumber::operator <= (BigNumber input) {
     return equals((*this) , input) || less((*this), input);
 }
 
-BigNumber BigNumber::operator+(BigNumber input) {
+BigNumber BigNumber::operator +(BigNumber input) {
     
     BigNumber result;
     
@@ -127,7 +127,7 @@ BigNumber BigNumber::operator+(BigNumber input) {
     return result;
 }
 
-BigNumber BigNumber::operator-(BigNumber input) {
+BigNumber BigNumber::operator -(BigNumber input) {
     
     // x - y = x + (-y)
     BigNumber tmp = input;
@@ -137,18 +137,78 @@ BigNumber BigNumber::operator-(BigNumber input) {
     
 }
 
-BigNumber BigNumber::operator * (BigNumber input) {
+BigNumber BigNumber::operator *(BigNumber input) {
     BigNumber result;
     
     result.setNumber(mul(getNumber(), input.getNumber()));
-    result.setSign( getSign() != input.getSign() );
+    
     
     if(result.getNumber() == "0") // avoid (-0) problem
         result.setSign(false);
+    else
+        result.setSign( getSign() != input.getSign() );
     
     return result;
 }
 
+BigNumber BigNumber::operator / (BigNumber input)
+{
+    long long int den = toInt( input.getNumber() );
+    BigNumber result;
+    
+    
+    result.setNumber( div(getNumber(), den).first );
+    
+    if(result.getNumber() == "0") // avoid (-0) problem
+        result.setSign(false);
+    else
+        result.setSign( getSign() != input.getSign() );
+    
+    
+    return result;
+}
+//-------------------------------------------------------------
+// Warning: Denomerator must be within "long long" size not "BigInteger"
+BigNumber BigNumber::operator % (BigNumber input)
+{
+    long long int den = toInt( input.getNumber() );
+    
+    BigNumber result;
+    long long int rem_int = div(number, den).second;
+    result.setNumber( toString(rem_int) );
+    
+    if(result.getNumber() == "0") // avoid (-0) problem
+        result.setSign(false);
+    else
+        result.setSign( getSign() != input.getSign() );
+    
+    return result;
+}
+
+//pair(qutiont, remainder)
+pair<string, long long int> BigNumber::div(string s, long long int in) {
+    
+    
+    long long int reminder = 0;
+    string result;
+    result.resize(10000);
+    
+    for(long long int i=0, len = s.length(); i<len; ++i) {
+        reminder = (reminder * 10) + (s[i] - '0');
+        result[i] = reminder / in + '0';
+        reminder %= in;
+    }
+    result.resize( s.length() );
+    
+    while(result[0] == '0' && result.length() != 1)
+        result.erase(0,1);
+    
+    if(result.length() == 0)
+        result = "0";
+    
+    return make_pair(result, reminder);
+    
+}
 
 BigNumber& BigNumber::operator += (BigNumber input) {
     (*this) = (*this) + input;
@@ -162,6 +222,16 @@ BigNumber& BigNumber::operator -= (BigNumber input) {
 
 BigNumber& BigNumber::operator *= (BigNumber input) {
     (*this) = (*this) * input;
+    return (*this);
+}
+
+BigNumber& BigNumber::operator /= (BigNumber input) {
+    (*this) = (*this) / input;
+    return (*this);
+}
+
+BigNumber& BigNumber::operator %= (BigNumber input) {
+    (*this) = (*this) % input;
     return (*this);
 }
 BigNumber::operator string() {
@@ -299,4 +369,28 @@ bool BigNumber::less(BigNumber n1, BigNumber n2) {
 
 bool BigNumber::greater(BigNumber n1, BigNumber n2) {
     return ! equals(n1, n2) && ! less(n1, n2);
+}
+
+
+string BigNumber::toString(long long int n)
+{
+    stringstream ss;
+    string temp;
+    
+    ss << n;
+    ss >> temp;
+    
+    return temp;
+}
+
+//-------------------------------------------------------------
+// converts string to long long
+long long int BigNumber::toInt(string s)
+{
+    long long int sum = 0;
+    
+    for(int i=0; i<s.length(); i++)
+        sum = (sum*10) + (s[i] - '0');
+    
+    return sum;
 }
